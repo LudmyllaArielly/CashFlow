@@ -1,0 +1,59 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Test Results
+TestResults/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Publish
+publish/
+
+# Coverage
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# Entity Framework
+*.mdf
+*.ldf
+
+# Secrets
+appsettings.Development.json
+secrets.json
+
+# User Secrets
+**/secrets.json
+
+# Azure
+ServiceDependencies/
+ServiceDependencies.Local.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
