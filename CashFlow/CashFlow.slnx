@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="CashFlow.API/CashFlow.API.csproj" />
-    <Project Path="CashFlow.Application/CashFlow.Application.csproj" />
+    <Project Path="src/CashFlow.API/CashFlow.API.csproj" Id="62c96c3e-c212-4472-b658-15d081ff106a" />
+    <Project Path="src/CashFlow.Application/CashFlow.Application.csproj" Id="a602bf12-e97e-40df-b1a2-9b78bad99480" />
     <Project Path="src/CashFlow.Communication/CashFlow.Communication.csproj" />
     <Project Path="src/CashFlow.Domain/CashFlow.Domain.csproj" />
     <Project Path="src/CashFlow.Exception/CashFlow.Exception.csproj" />
