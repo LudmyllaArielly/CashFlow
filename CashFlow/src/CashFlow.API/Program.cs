@@ -1,15 +1,16 @@
+using CashFlow.API.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configuração global do filtro de exceção para capturar e tratar exceções lançadas durante a execução da aplicação.
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
