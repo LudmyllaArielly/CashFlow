@@ -4,9 +4,16 @@ using CashFlow.Communication.Requests;
 
 namespace CommonTestUtilities.Requests;
 
+/*
+ * Nós precisamos fazer uma instância dessa classe simplesmente para
+ * chamamos a função build? Não, existe uma forma de chamar essa função
+ * sem fazer uma instância dessa classe. Essa função é independente, então
+ * não tem nenhum propósito de fazemos um new na classe. E só vir e
+ * colocar essa como estática.
+ */
 public class RequestRegisterExpenseJsonBuilder
 {
-    public RequestRegisterExpenseJson Build()
+    public static RequestRegisterExpenseJson Build()
     {
         // var faker = new Faker();
 
@@ -17,6 +24,8 @@ public class RequestRegisterExpenseJsonBuilder
             Date = faker.Date.Past()
         };*/
 
+      // Todas a vezes que fizer um new no faker ele vai preencher os atributos
+      // com valores diferentes
        return new Faker<RequestRegisterExpenseJson>()
             .RuleFor(r => r.Title, faker => faker.Commerce.ProductName())
             .RuleFor(r => r.Description, faker => faker.Commerce.ProductDescription())
