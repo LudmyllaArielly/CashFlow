@@ -7,5 +7,7 @@
     <Project Path="src/CashFlow.Exception/CashFlow.Exception.csproj" />
     <Project Path="src/CashFlow.Infrastructure/CashFlow.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Validators.Tests/Validators.Tests.csproj" Id="e70e96d9-a33d-4c01-83e9-55adfb015378" />
+  </Folder>
 </Solution>
