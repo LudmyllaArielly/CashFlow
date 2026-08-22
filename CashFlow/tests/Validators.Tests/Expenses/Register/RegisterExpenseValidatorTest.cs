@@ -1,6 +1,6 @@
 ﻿using CashFlow.Application.UseCases.Expense.Register;
 using CommonTestUtilities.Requests;
-using FluentAssertions;
+using Shouldly;
 
 namespace Validators.Tests.Expenses.Register;
 
@@ -46,6 +46,6 @@ public class RegisterExpenseValidatorTest
          * Estamos esperando que o resultado da validação seja 
          * válido, ou seja, que não tenha erros de validação
          */
-        result.IsValid.Should().BeTrue();
+        result.IsValid.ShouldBeTrue();
     }
 }
