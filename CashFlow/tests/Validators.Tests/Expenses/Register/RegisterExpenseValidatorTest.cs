@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.UseCases.Expense.Register;
+using CashFlow.Communication.Enums;
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using Shouldly;
@@ -78,5 +79,70 @@ public class RegisterExpenseValidatorTest
         result.IsValid.ShouldBeFalse();
         result.Errors.ShouldHaveSingleItem().ErrorMessage.
             ShouldBe(ResourceErrorMessages.TITLE_REQUIRED);
+    }
+
+    [Fact]
+    public void Error_Date_Future()
+    {
+        // Arrange
+        var validator = new RegisterExpenseValidator();
+        var request = RequestRegisterExpenseJsonBuilder.Build();
+
+        // Forçar a data ser no futuro
+        request.Date = DateTime.UtcNow.AddDays(1);
+
+        // Act
+        var result = validator.Validate(request);
+
+        // Assert
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldHaveSingleItem().ErrorMessage.
+            ShouldBe(ResourceErrorMessages.EXPENSE_CANNOT_FOR_THE_FUTURE);
+    }
+
+    [Fact]
+    public void Error_Payment_Type_Invalid()
+    {
+        // Arrange
+        var validator = new RegisterExpenseValidator();
+        var request = RequestRegisterExpenseJsonBuilder.Build();
+
+        // Forçar o tipo de pagamento ser inválido
+        request.PaymentType = (PaymentType)700;
+
+        // Act
+        var result = validator.Validate(request);
+
+        // Assert
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldHaveSingleItem().ErrorMessage.
+            ShouldBe(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    /*
+     * Eu quero que execute essa função várias vezes, trocando
+     * o valor do parâmentro do amount, para testar valores inválidos.
+     * A ordem não é especifíca, não quer dizer que a primeira execução
+     * do teste o parâmentro vai ser zero.
+     */
+    public void Error_Amount_Invalid(decimal amount)
+    {
+        // Arrange
+        var validator = new RegisterExpenseValidator();
+        var request = RequestRegisterExpenseJsonBuilder.Build();
+
+        // Forçar o valor ser inválido (menor ou igual a zero)
+        request.Amount = amount;
+
+        // Act
+        var result = validator.Validate(request);
+
+        // Assert
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldHaveSingleItem().ErrorMessage.
+            ShouldBe(ResourceErrorMessages.AMOUNT_MUST_BE_GREATER_THAN_ZERO);
     }
 }
