@@ -18,16 +18,26 @@ public class CultureMiddleware
 
     public async Task Invoke(HttpContext context)
     {
+
+        // Lista de todos idiomas que o dotnet da suporte.
+        var supportedLanguages = CultureInfo.GetCultures(CultureTypes.AllCultures).ToList();
+
         // Extrai qual idioma o cliente deseja receber a resposta da API
-        var culture = context.Request.Headers.AcceptLanguage.FirstOrDefault();
+        var requestedCulture = context.Request.Headers.AcceptLanguage.FirstOrDefault();
 
         // Instancia uma cultura padrão (inglês) caso o cliente não tenha definido um idioma
-        var cultureInfo = new System.Globalization.CultureInfo("en");
+        var cultureInfo = new CultureInfo("en");
 
         // Se o cliente definiu um idioma, então sobrescreve a cultura padrão com a cultura desejada pelo cliente
-        if (string.IsNullOrWhiteSpace(culture) == false)
+        /*
+         * Estou indo lá na minha lista, utilizando linq para verificar se existe dentro dessa lista
+         * uma linguagem. Ele vai verificar dentro da lista cada CultureInfo,
+         * se existe alguma linguagem com o nome igual a cultura que foi solicitada.
+         */
+        if (string.IsNullOrWhiteSpace(requestedCulture) == false
+            && supportedLanguages.Exists(language => language.Name.Equals(requestedCulture)))
         {
-            cultureInfo = new CultureInfo(culture);
+            cultureInfo = new CultureInfo(requestedCulture);
         }
 
         // Altera a cultura atual da aplicação para a cultura desejada pelo cliente
