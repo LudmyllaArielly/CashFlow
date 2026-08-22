@@ -3,7 +3,7 @@
 namespace CashFlow.API.Middleware;
 
 /*
- Middleware para manipular as requisições antes de chegarem aos
+ Middleware de cultura para manipular as requisições antes de chegarem aos
  controllers. Pode ser usado para autenticação, logging, manipulação 
  de erros, definir idioma das mensagens de resposta da API e etc.
  */

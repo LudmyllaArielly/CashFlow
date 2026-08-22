@@ -1,4 +1,5 @@
 using CashFlow.API.Filters;
+using CashFlow.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Configuração do middleware para avisamos para a API que existe um middleare(interceptador) que vai tratar a cultura da aplicação com base no cabeçalho "Accept-Language" da requisição.
+app.UseMiddleware<CultureMiddleware>();
 
 app.UseHttpsRedirection();
 
