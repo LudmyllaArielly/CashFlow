@@ -16,7 +16,20 @@ public class RegisterExpenseValidatorTest
         /*
         * Arrange(preparação)
         * Parte que vamos configurar, criar as instâncias de tudo 
-        * que a gente precisa para executar esse teste de unidade
+        * que a gente precisa para executar esse teste de unidade.
+        * 
+        * Esses dados fixos aqui não é muito legal, vai gerar dois problemas.
+        * Primeiro, o código é hardcoded, ou seja, serão sempre fixos.
+        * Segundo, futuramente vamos querer compartilhar esse código, essa
+        * instância dessa request com outros testes.
+        * 
+        * Vamos ter um projeto de teste para testar só os validators,
+        * outro projeto para testar só os usecases. Então tem esses 
+        * outros tipos. Futuramente quando criamos um teste para o nosso
+        * usecase vão precisar receber uma instância de um request, porque
+        * vamos testar o executar e essa função recebe uma instância de request. 
+        * Então não quero criar uma nova instância de request em cada teste. E se um dia algum coisa mudar,
+        * por exemplo, não ter mais a descrição, vamos precisar mudar em um só lugar.
         */
         var validator = new RegisterExpenseValidator();
         var request = new RequestRegisterExpenseJson
