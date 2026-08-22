@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.UseCases.Expense.Register;
+using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using Shouldly;
 
@@ -8,7 +9,7 @@ namespace Validators.Tests.Expenses.Register;
 public class RegisterExpenseValidatorTest
 {
     /*
-     * Isso define esssa função, como uma função especial de teste, 
+     * Isso define essa função, como uma função especial de teste, 
      * que será executada pelo xUnit
      */
     [Fact]
@@ -47,5 +48,35 @@ public class RegisterExpenseValidatorTest
          * válido, ou seja, que não tenha erros de validação
          */
         result.IsValid.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void Error_Title_Empty()
+    {
+        // Arrange
+        var validator = new RegisterExpenseValidator();
+        var request = RequestRegisterExpenseJsonBuilder.Build();
+
+        // Forçar o título ser vazio
+        request.Title = string.Empty;
+
+        // Act
+        var result = validator.Validate(request);
+
+        // Assert
+        /*
+         * Veja que ele não reclamou do ResourceErrorMessages e no meu projeto
+         * Validators.Tests não tem referência para o projeto 
+         * CashFlow.Exception, mas tem referência com projeto de Application
+         * e as nossas exceptions são públicas. Então a partir de application
+         * ele consegue identificar a classe ResourceErrorMessages e 
+         * acessar a propriedade TITLE_REQUIRED. Porém agora eu adicionei
+         * essa referência para o projeto Validators.Tests.
+         * 
+         */
+
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldHaveSingleItem().ErrorMessage.
+            ShouldBe(ResourceErrorMessages.TITLE_REQUIRED);
     }
 }
