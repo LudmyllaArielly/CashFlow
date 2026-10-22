@@ -1,7 +1,6 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Exception.ExceptionsBase;
-using CashFlow.Infrastructure.DataAccess;
 
 namespace CashFlow.Application.UseCases.Expense.Register;
 
@@ -11,6 +10,7 @@ public class RegisterExpenseUseCase
     {
         Validate(request);
 
+        /*
         var dbContext = new CashFlowDbContext();
 
         var entity = new CashFlow.Domain.Entities.Expense
@@ -26,7 +26,7 @@ public class RegisterExpenseUseCase
         dbContext.Expenses.Add(entity);
 
         // Persiste
-        dbContext.SaveChanges();
+        dbContext.SaveChanges();*/
 
         return new ResponseRegisterExpenseJson();
     }
