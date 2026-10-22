@@ -1,5 +1,6 @@
 using CashFlow.API.Filters;
 using CashFlow.API.Middleware;
+using CashFlow.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddSwaggerGen();
 
 // Configuração global do filtro de exceção para capturar e tratar exceções lançadas durante a execução da aplicação.
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
+// Injeção de dependência
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

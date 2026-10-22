@@ -1,5 +1,5 @@
 ﻿using CashFlow.Domain.Entities;
-using CashFlow.Domain.Repositories.Expense;
+using CashFlow.Domain.Repositories.Expenses;
 
 namespace CashFlow.Infrastructure.DataAccess.Repositories;
 
